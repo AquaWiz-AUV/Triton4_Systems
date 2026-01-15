@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "http://ik1-302-11314.vs.sakura.ne.jp/api/:path*"
+    }
+  ]
+}
