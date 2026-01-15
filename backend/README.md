@@ -36,14 +36,14 @@ graph LR
 
 ## 技術スタック
 
-| カテゴリ | 技術 |
-|---|---|
-| フレームワーク | FastAPI |
-| ORM | SQLAlchemy 2.0 (async) |
-| データベース | PostgreSQL (本番) / SQLite (開発) |
-| マイグレーション | Alembic |
-| ロギング | structlog |
-| コンテナ | Docker / Docker Compose |
+| カテゴリ         | 技術                              |
+| ---------------- | --------------------------------- |
+| フレームワーク   | FastAPI                           |
+| ORM              | SQLAlchemy 2.0 (async)            |
+| データベース     | PostgreSQL (本番) / SQLite (開発) |
+| マイグレーション | Alembic                           |
+| ロギング         | structlog                         |
+| コンテナ         | Docker / Docker Compose           |
 
 ## プロジェクト構成
 
@@ -145,11 +145,11 @@ erDiagram
 
 Vehicle（AUV）との直接通信用エンドポイント。
 
-| エンドポイント | メソッド | 説明 |
-|---|---|---|
-| `/hb` | POST | Heartbeat 受信。テレメトリを保存し、待機中コマンドを返却 |
-| `/descent-check` | POST | 潜航前チェック。計画を検証し OK/NG を返却 |
-| `/ascent-notify` | POST | 浮上完了通知。ダイブ結果を記録 |
+| エンドポイント   | メソッド | 説明                                                     |
+| ---------------- | -------- | -------------------------------------------------------- |
+| `/hb`            | POST     | Heartbeat 受信。テレメトリを保存し、待機中コマンドを返却 |
+| `/descent-check` | POST     | 潜航前チェック。計画を検証し OK/NG を返却                |
+| `/ascent-notify` | POST     | 浮上完了通知。ダイブ結果を記録                           |
 
 ### Web API (`/api/v1`)
 
@@ -157,21 +157,22 @@ Web UI およびサードパーティアプリ向け REST API。
 
 #### デバイス管理
 
-| エンドポイント | メソッド | 説明 |
-|---|---|---|
-| `/devices` | GET | デバイス一覧（ページネーション対応） |
-| `/devices/{mid}` | GET | デバイス詳細（最新テレメトリ含む） |
-| `/devices/{mid}/status` | GET | デバイス状態（軽量版） |
+| エンドポイント          | メソッド | 説明                                 |
+| ----------------------- | -------- | ------------------------------------ |
+| `/devices`              | GET      | デバイス一覧（ページネーション対応） |
+| `/devices/{mid}`        | GET      | デバイス詳細（最新テレメトリ含む）   |
+| `/devices/{mid}/status` | GET      | デバイス状態（軽量版）               |
 
 #### コマンド管理
 
-| エンドポイント | メソッド | 説明 |
-|---|---|---|
-| `/commands` | POST | コマンド送信（RUN_DIVE） |
-| `/commands` | GET | コマンド一覧 |
-| `/commands/{id}` | GET | コマンド詳細 |
+| エンドポイント   | メソッド | 説明                     |
+| ---------------- | -------- | ------------------------ |
+| `/commands`      | POST     | コマンド送信（RUN_DIVE） |
+| `/commands`      | GET      | コマンド一覧             |
+| `/commands/{id}` | GET      | コマンド詳細             |
 
 **コマンド送信例:**
+
 ```json
 {
   "mid": "TR4-001",
@@ -186,13 +187,14 @@ Web UI およびサードパーティアプリ向け REST API。
 
 #### テレメトリ
 
-| エンドポイント | メソッド | 説明 |
-|---|---|---|
-| `/telemetry/latest/{mid}` | GET | 最新テレメトリ |
-| `/telemetry/heartbeats` | GET | Heartbeat 履歴 |
-| `/telemetry/trajectory/{mid}` | GET | GPS 軌跡（GeoJSON / detailed） |
+| エンドポイント                | メソッド | 説明                           |
+| ----------------------------- | -------- | ------------------------------ |
+| `/telemetry/latest/{mid}`     | GET      | 最新テレメトリ                 |
+| `/telemetry/heartbeats`       | GET      | Heartbeat 履歴                 |
+| `/telemetry/trajectory/{mid}` | GET      | GPS 軌跡（GeoJSON / detailed） |
 
 **GeoJSON レスポンス例:**
+
 ```json
 {
   "type": "FeatureCollection",
@@ -214,30 +216,30 @@ Web UI およびサードパーティアプリ向け REST API。
 
 #### ダイブ・イベント
 
-| エンドポイント | メソッド | 説明 |
-|---|---|---|
-| `/dives` | GET | ダイブ履歴 |
-| `/dives/{id}` | GET | ダイブ詳細 |
-| `/events` | GET | イベントログ |
+| エンドポイント | メソッド | 説明         |
+| -------------- | -------- | ------------ |
+| `/dives`       | GET      | ダイブ履歴   |
+| `/dives/{id}`  | GET      | ダイブ詳細   |
+| `/events`      | GET      | イベントログ |
 
 ### ユーティリティ
 
-| エンドポイント | メソッド | 説明 |
-|---|---|---|
-| `/health` | GET | ヘルスチェック（DB 接続確認） |
-| `/admin/reset-db` | POST | データベースリセット（開発用） |
+| エンドポイント    | メソッド | 説明                           |
+| ----------------- | -------- | ------------------------------ |
+| `/health`         | GET      | ヘルスチェック（DB 接続確認）  |
+| `/admin/reset-db` | POST     | データベースリセット（開発用） |
 
 ## セットアップ
 
 ### 環境変数
 
-| 変数名 | 説明 | デフォルト |
-|---|---|---|
-| `DATABASE_URL` | DB 接続文字列 | `postgresql+asyncpg://...` |
-| `POSTGRES_DB` | データベース名 | `triton_com` |
-| `POSTGRES_USER` | DB ユーザー | `triton` |
-| `POSTGRES_PASSWORD` | DB パスワード | - |
-| `LOG_LEVEL` | ログレベル | `INFO` |
+| 変数名              | 説明           | デフォルト                 |
+| ------------------- | -------------- | -------------------------- |
+| `DATABASE_URL`      | DB 接続文字列  | `postgresql+asyncpg://...` |
+| `POSTGRES_DB`       | データベース名 | `triton_com`               |
+| `POSTGRES_USER`     | DB ユーザー    | `triton`                   |
+| `POSTGRES_PASSWORD` | DB パスワード  | -                          |
+| `LOG_LEVEL`         | ログレベル     | `INFO`                     |
 
 ### Docker での起動（推奨）
 
@@ -303,7 +305,3 @@ stateDiagram-v2
     QUEUED --> EXPIRED: タイムアウト
     EXECUTING --> ERROR: 異常終了
 ```
-
-## ライセンス
-
-MIT

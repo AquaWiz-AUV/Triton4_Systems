@@ -119,16 +119,16 @@ A7        - LTE Modem TX
 
 ```mermaid
 stateDiagram-v2
-    [*] --> IDLE: 電源ON
-    IDLE --> SENSING: IR: ENTER_SENSING_MODE
-    SENSING --> IDLE: IR: ENTER_IDLE_MODE
+    [*] --> IDLE : 電源ON
+    IDLE --> SENSING : IRリモコン (SENSING)
+    SENSING --> IDLE : IRリモコン (IDLE)
 
     state SENSING {
         [*] --> EXHAUST_WAIT
-        EXHAUST_WAIT --> EXHAUST_ON: exhaustStartDelayMs 経過
-        EXHAUST_ON --> EXHAUST_OFF: exhaustStopDelayMs 経過
-        EXHAUST_OFF --> SUPPLY_ON: supplyStartDelayMs 経過
-        SUPPLY_ON --> EXHAUST_WAIT: supplyStopDelayMs 経過<br/>+ LTE送信
+        EXHAUST_WAIT --> EXHAUST_ON : 排気開始
+        EXHAUST_ON --> EXHAUST_OFF : 排気停止
+        EXHAUST_OFF --> SUPPLY_ON : 給気開始
+        SUPPLY_ON --> EXHAUST_WAIT : 給気停止 + LTE送信
     }
 ```
 

@@ -21,36 +21,6 @@ Triton-4 AUV（自律型水中ロボット）のリアルタイムモニタリ�
 | HTTP クライアント | Axios                      |
 | アイコン          | Lucide React               |
 
-## コンポーネント構成
-
-```mermaid
-graph TB
-    subgraph "App.jsx"
-        App[App]
-    end
-
-    subgraph "Layout"
-        Layout[Layout]
-        Header[Header]
-    end
-
-    subgraph "Main Components"
-        Map[MapComponent]
-        Info[MachineInfoPanel]
-    end
-
-    subgraph "API Layer"
-        API[api.js]
-    end
-
-    App --> Layout
-    Layout --> Header
-    Layout --> Map
-    Layout --> Info
-    Map --> API
-    Info --> API
-```
-
 ## プロジェクト構成
 
 ```
@@ -258,7 +228,3 @@ const mapOptions = {
   disableDefaultUI: true,  // デフォルト UI 非表示
 };
 ```
-
-## ライセンス
-
-MIT
